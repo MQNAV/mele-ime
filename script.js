@@ -7,19 +7,9 @@ mainContent.style.display = "none";
 
 const playlist = [
     { title:"Olur Ya", file:"assets/music/olur-ya.mp3" },
-    { title:"Cambaz", file:"assets/music/cambaz.mp3" },
-    { title:"Doktor", file:"assets/music/doktor.mp3" },
     { title:"Liselim", file:"assets/music/liselim.mp3" },
-    { title:"Kalpten Dudağa", file:"assets/music/kalpten-dudaga.mp3" },
     { title:"Sensiz Olmaz", file:"assets/music/sensiz-olmaz.mp3" },
-    { title:"Yüzük", file:"assets/music/yuzuk.mp3" },
-    { title:"Keyfi Yolunda Aşkı Sonunda", file:"assets/music/keyfi-yolunda-aski-sonunda.mp3" },
-    { title:"Şans Meleğim", file:"assets/music/sans-melegim.mp3" },
     { title:"Varsa Yoksa Sen", file:"assets/music/varsa-yoksa-sen.mp3" },
-    { title:"Tüm Bir Yaşam", file:"assets/music/tum-bir-yasam.mp3" },
-    { title:"İşte Öyle Bir Şey", file:"assets/music/iste-oyle-bir-sey.mp3" },
-    { title:"Bir De Bana Sor", file:"assets/music/bir-de-bana-sor.mp3" },
-    { title:"Söyle Canım", file:"assets/music/soyle-canim.mp3" },
     { title:"Ankara Rüzgarı", file:"assets/music/ankara-ruzgari.mp3" },
     { title:"Çıt Çıt Çedene", file:"assets/music/cit-cit-cedene.mp3" }
 ];
@@ -352,3 +342,56 @@ introLines.forEach((line, index) => {
 setTimeout(() => {
     introStartBtn.classList.add("show");
 }, introLines.length * 1400);
+
+document.addEventListener("DOMContentLoaded", () => {
+    const passwordScreen = document.getElementById("passwordScreen");
+    const passwordInput = document.getElementById("passwordInput");
+    const passwordBtn = document.getElementById("passwordBtn");
+    const passwordError = document.getElementById("passwordError");
+    const passwordCard = document.querySelector(".password-card");
+
+    const correctPassword = "14082024";
+
+    function checkPassword() {
+        const enteredPassword = passwordInput.value.trim();
+
+        if (enteredPassword === correctPassword) {
+            passwordError.classList.remove("show");
+            passwordScreen.classList.add("unlocked");
+
+            setTimeout(() => {
+                passwordScreen.remove();
+            }, 800);
+        } else {
+            passwordError.classList.add("show");
+            passwordCard.classList.remove("shake");
+
+            void passwordCard.offsetWidth;
+
+            passwordCard.classList.add("shake");
+            passwordInput.value = "";
+            passwordInput.focus();
+        }
+    }
+
+    passwordBtn.addEventListener("click", checkPassword);
+
+    passwordInput.addEventListener("keydown", (event) => {
+        if (event.key === "Enter") {
+            checkPassword();
+        }
+    });
+});
+
+if ("serviceWorker" in navigator) {
+    window.addEventListener("load", () => {
+        navigator.serviceWorker
+            .register("./sw.js")
+            .then(() => {
+                console.log("Uygulama modu hazır.");
+            })
+            .catch((error) => {
+                console.error("Service worker hatası:", error);
+            });
+    });
+}
