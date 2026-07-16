@@ -1,0 +1,25 @@
+{
+  "name": "Melek'e Özel",
+  "short_name": "Melek ❤️",
+  "description": "Melek için hazırlanmış özel bir doğum günü hediyesi.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#09070d",
+  "theme_color": "#160e21",
+  "orientation": "portrait-primary",
+ "icons": [
+  {
+    "src": "assets/icons/icon-192-v2.png",
+    "sizes": "192x192",
+    "type": "image/png",
+    "purpose": "any maskable"
+  },
+  {
+    "src": "assets/icons/icon-512-v2.png",
+    "sizes": "512x512",
+    "type": "image/png",
+    "purpose": "any maskable"
+  }
+]
+}
