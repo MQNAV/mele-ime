@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#100817">
+
+    <title>Sürpriz İçin Biraz Sabır ❤️</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+    <style>
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+        }
+
+        body{
+            min-height:100vh;
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            overflow:hidden;
+            padding:24px;
+            color:white;
+            text-align:center;
+            font-family:'Poppins',sans-serif;
+            background:
+                radial-gradient(circle at top,rgba(126,67,158,.45),transparent 38%),
+                linear-gradient(180deg,#170c21,#07060a 75%);
+        }
+
+        .stars{
+            position:fixed;
+            inset:-30%;
+            pointer-events:none;
+            opacity:.16;
+            background-image:radial-gradient(white 1px,transparent 1px);
+            background-size:38px 38px;
+            animation:moveStars 45s linear infinite;
+        }
+
+        @keyframes moveStars{
+            to{
+                transform:translateY(-300px);
+            }
+        }
+
+        .glow{
+            position:fixed;
+            width:420px;
+            height:420px;
+            border-radius:50%;
+            background:rgba(255,121,190,.13);
+            filter:blur(90px);
+            pointer-events:none;
+        }
+
+        .card{
+            position:relative;
+            z-index:2;
+            width:min(820px,100%);
+            padding:58px 30px;
+            border-radius:32px;
+            background:rgba(255,255,255,.065);
+            border:1px solid rgba(255,255,255,.12);
+            box-shadow:0 30px 100px rgba(0,0,0,.48);
+            backdrop-filter:blur(20px);
+        }
+
+        .heart{
+            font-size:55px;
+            animation:heartbeat 1.6s infinite;
+        }
+
+        @keyframes heartbeat{
+            50%{
+                transform:scale(1.13);
+            }
+        }
+
+        .small{
+            margin-top:18px;
+            color:#f4b9d6;
+            font-size:12px;
+            letter-spacing:3px;
+            text-transform:uppercase;
+        }
+
+        h1{
+            margin:15px 0;
+            font-family:'Cormorant Garamond',serif;
+            font-size:clamp(44px,9vw,78px);
+            line-height:1;
+        }
+
+        .description{
+            max-width:620px;
+            margin:0 auto;
+            color:rgba(255,255,255,.76);
+            line-height:1.8;
+        }
+
+        .countdown{
+            display:grid;
+            grid-template-columns:repeat(4,1fr);
+            gap:14px;
+            margin-top:42px;
+        }
+
+        .time-box{
+            padding:25px 10px;
+            border-radius:20px;
+            background:rgba(255,255,255,.07);
+            border:1px solid rgba(255,255,255,.09);
+        }
+
+        .time-box strong{
+            display:block;
+            font-family:'Cormorant Garamond',serif;
+            font-size:clamp(36px,7vw,58px);
+            line-height:1;
+        }
+
+        .time-box span{
+            display:block;
+            margin-top:8px;
+            color:rgba(255,255,255,.63);
+            font-size:12px;
+            letter-spacing:1px;
+            text-transform:uppercase;
+        }
+
+        .note{
+            margin-top:34px;
+            color:#f3bfd8;
+            font-family:'Cormorant Garamond',serif;
+            font-size:23px;
+        }
+
+        @media(max-width:620px){
+            .card{
+                padding:44px 18px;
+            }
+
+            .countdown{
+                grid-template-columns:repeat(2,1fr);
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="stars"></div>
+<div class="glow"></div>
+
+<main class="card">
+    <div class="heart">💜</div>
+
+    <p class="small">Henüz zamanı gelmedi</p>
+
+    <h1>Biraz sabır, güzelim...</h1>
+
+    <p class="description">
+        Bu sürpriz yalnızca senin için hazırlandı.
+        <br>
+        18 Temmuz saat 00.00 olduğunda kapılar kendiliğinden açılacak.
+    </p>
+
+    <section class="countdown">
+        <div class="time-box">
+            <strong id="days">00</strong>
+            <span>Gün</span>
+        </div>
+
+        <div class="time-box">
+            <strong id="hours">00</strong>
+            <span>Saat</span>
+        </div>
+
+        <div class="time-box">
+            <strong id="minutes">00</strong>
+            <span>Dakika</span>
+        </div>
+
+        <div class="time-box">
+            <strong id="seconds">00</strong>
+            <span>Saniye</span>
+        </div>
+    </section>
+
+    <p class="note">O güne kadar merak etmen serbest. ❤️</p>
+</main>
+
+<script>
+    const unlockDate = new Date("2026-07-18T00:00:00+03:00");
+
+    function updateCountdown(){
+        const difference = unlockDate.getTime() - Date.now();
+
+        if(difference <= 0){
+            window.location.replace("index.html");
+            return;
+        }
+
+        const days = Math.floor(difference / 86400000);
+        const hours = Math.floor((difference % 86400000) / 3600000);
+        const minutes = Math.floor((difference % 3600000) / 60000);
+        const seconds = Math.floor((difference % 60000) / 1000);
+
+        document.getElementById("days").textContent =
+            String(days).padStart(2,"0");
+
+        document.getElementById("hours").textContent =
+            String(hours).padStart(2,"0");
+
+        document.getElementById("minutes").textContent =
+            String(minutes).padStart(2,"0");
+
+        document.getElementById("seconds").textContent =
+            String(seconds).padStart(2,"0");
+    }
+
+    updateCountdown();
+    setInterval(updateCountdown,1000);
+</script>
+
+</body>
+</html>
