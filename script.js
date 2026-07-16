@@ -1,3 +1,10 @@
+// === ZAMAN KİLİDİ ===
+const unlockDate = new Date("2026-07-18T00:00:00+03:00");
+
+if(Date.now() < unlockDate.getTime()){
+    window.location.replace("countdown.html");
+}
+
 const startBtn = document.getElementById("startBtn");
 const loadingScreen = document.getElementById("loading-screen");
 const mainContent = document.getElementById("main-content");
